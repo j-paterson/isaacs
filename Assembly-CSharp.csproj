@@ -106,6 +106,7 @@
      <Compile Include="Assets\MenuSelectScript.cs" />
      <Compile Include="Assets\MovementScript.cs" />
      <Compile Include="Assets\PauseFlightScript.cs" />
+     <Compile Include="Assets\PlacementModeScript.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusConstants.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusMaterial.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusMeshes.cs" />

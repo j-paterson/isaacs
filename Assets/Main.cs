@@ -19,6 +19,8 @@ public class Main : MonoBehaviour {
      * coordinate synchronization. Id gives a unique id for each waypoint marker. 
      */
 
+    /* Another mode of waypoint placement is the floorPlacement mode. When set true, waypoint will be placed distanceAboveFloor meters above the position of the cursor. 
+     */
     public Vector3 positionDeviation;
     public Quaternion quaternionDeviation; 
     public TextMesh debugText;
@@ -29,6 +31,8 @@ public class Main : MonoBehaviour {
     public List<GameObject> markerList = new List<GameObject>();
     public SpatialMapping mapping;
     public GameObject calibrationFrame;
+    public bool floorPlacement;
+    public float distanceAboveFloor = .1f;
     string ipText;
     SynchronizeScript synchronizeScript;
 
@@ -121,7 +125,7 @@ public class Main : MonoBehaviour {
     }
 #endif
     /* When the hololens recognizes a doubleTap, a waypoint will be placed 1 meter in front of where
-     * the hololens is starting at.
+     * the hololens is starting at. If calibration mode is true, then we place a calibration frame;
      */
     void OnDoubleTap()
     {
@@ -141,10 +145,18 @@ public class Main : MonoBehaviour {
         } else
         {
             GameObject cursor = GameObject.Find("Cursor");
-            float distanceToCursor = (cursor.transform.position - camera.transform.forward * .2f - camera.transform.position).magnitude;
-            float minDistance = Mathf.Min(distanceToCursor, 1); 
-            instantiateMarker(camera.transform.position + minDistance * camera.transform.forward, new Quaternion(0, 0, 0, 0));
-      
+
+            if (floorPlacement)
+            {
+                instantiateMarker(cursor.transform.position + new Vector3(0, distanceAboveFloor, 0), new Quaternion(0, 0, 0, 0));
+            } else
+            {
+                float distanceToCursor = (cursor.transform.position - camera.transform.forward * .2f - camera.transform.position).magnitude;
+                float minDistance = Mathf.Min(distanceToCursor, 1);
+                instantiateMarker(camera.transform.position + minDistance * camera.transform.forward, new Quaternion(0, 0, 0, 0));
+
+            }
+
         }
         
     }

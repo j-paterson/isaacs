@@ -38,7 +38,7 @@ public class MovementScript: MonoBehaviour {
         cameraRightVector = camera.transform.right;
     }
 
-    /* Moves the object by computing and moveVector and rotating the object to star at the hololens
+    /* Moves the object by computing and moveVector and rotating the object to stare at the hololens
      */ 
     void OnManipulationUpdate(Vector3 position)
     {
